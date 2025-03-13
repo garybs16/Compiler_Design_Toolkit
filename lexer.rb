@@ -23,8 +23,8 @@ class Lexer
 
 	# Remove comments
 	def remove_comments( code )
-		code.gsub!()	# Single line comments
-		code.gsub!()	# Multi line comments
+		code.gsub!(/\/\/.*/, "")	# Single line comments
+		code.gsub!(/\/\*.*?\*\//m, "")	# Multi line comments
 		code
 	end
 
@@ -46,5 +46,7 @@ class Lexer
 
 	# Display tokens
 	def display_tokens
-
+		@tokens.each.do |lexeme, token_type|
+			puts "\"#{lexeme}\" = #{token_type.downcase}"
+		end
 	end
