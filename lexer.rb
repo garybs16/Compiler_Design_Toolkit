@@ -4,7 +4,7 @@
 
 class Lexer
     # Define token categories using regex and lists
-    KEYWORDS = %w[int if else return main]
+    KEYWORDS = %w[int if else return]
     OPERATORS = %w[+ - * / = >= <= != == > <]
     SEPARATORS = %w[{ } ( ) ; ,]
 
