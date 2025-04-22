@@ -9,6 +9,8 @@ def predictive_parser( input ):
 
 	# Parsing Logic
 
+terminals = ['a', '+', '-', '$', '/', '(', ')', '*']
+non_terminals = ['E', 'Q', 'T', 'R', 'F']
 
 # Testing
 test_strings = [
