@@ -7,9 +7,10 @@ def predictive_parser(input):
         'F': {'a': ['a'], '(': ['(', 'E', ')']}
     }
 
-    stack = ['$', 'E']  # Initialize stack with end marker and start symbol
-    input += '$'        # Add end marker to the input
+    stack = ['$', 'E']
+    input += '$'
     index = 0
+    derivation = []  # To track the production rules used
 
     print(f"{'Stack':<20} {'Input':<20} {'Action'}")
     print('-' * 50)
@@ -22,7 +23,8 @@ def predictive_parser(input):
 
         if top == current_input == '$':
             print("Accept")
-            break
+            print("String Accepted ✅")
+            return
         elif top == current_input:
             stack.pop()
             index += 1
@@ -31,28 +33,18 @@ def predictive_parser(input):
             production = parsing_table[top].get(current_input)
             if production is None:
                 print(f"Error: no rule for ({top}, {current_input})")
-                break
+                print("Syntax Error ❌")
+                return
             else:
                 stack.pop()
                 if production != ['ε']:
                     stack.extend(reversed(production))
+                derivation.append(f"{top} -> {''.join(production)}")
                 print(f"Output {top} -> {''.join(production)}")
         else:
             print(f"Error: unexpected symbol {current_input}")
-            break
+            print("Syntax Error ❌")
+            return
 
+    print("String Rejected ❌")
 
-terminals = ['a', '+', '-', '$', '/', '(', ')', '*']
-non_terminals = ['E', 'Q', 'T', 'R', 'F']
-
-# Testing
-test_strings = [
-    "(a+a)*a$",
-    "a*(a/a)$",
-    "a(a+a)$"
-]
-
-print("\n--- Testing ---")
-for string in test_strings:
-    print(f"\nParsing: {string}")
-    predictive_parser(string)
