@@ -1,3 +1,11 @@
+# PROJECT 2 Report File
+# CPSC 323-11: Group 4
+# Group Members 
+# - Anar Otgonbaatar 
+# - Andres Ugalde 
+# - Daniel Felix 
+# - Gary Samue
+
 def predictive_parser(input):
     parsing_table = {
         'E': {'a': ['T', 'Q'], '(': ['T', 'Q']},
@@ -7,19 +15,19 @@ def predictive_parser(input):
         'F': {'a': ['a'], '(': ['(', 'E', ')']}
     }
 
-    stack = ['$', 'E']
-    input += '$'
-    index = 0
+    stack = ['$', 'E']	# Init stack with start symbols
+    input += '$'		# Append $ to mark end of input
+    index = 0			# Input pointer
     derivation = []  # To track the production rules used
 
-    print(f"{'Stack':<20} {'Input':<20} {'Action'}")
+    print(f"{'Stack':<45} {'Input':<15} {'Action'}")
     print('-' * 50)
 
     while len(stack) > 0:
         top = stack[-1]
         current_input = input[index]
 
-        print(f"{''.join(stack):<20} {input[index:]:<20}", end='')
+        print(f"{str(stack):<45} {input[index:]:<15}", end='')
 
         if top == current_input == '$':
             print("Accept")
@@ -48,3 +56,7 @@ def predictive_parser(input):
 
     print("String Rejected ❌")
 
+test_strings = ["(a+a)*a", "a*(a/a)", "a(a+a)"]
+for string in test_strings:
+    print( f"\nInput: { string }" )
+    predictive_parser( string )
