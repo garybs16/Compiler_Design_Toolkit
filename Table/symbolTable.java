@@ -56,4 +56,25 @@ class symbolTable {
 		Symbol symbol = new Symbol(name, type, value, line, scope, role, size);
 		current.put(name, symbol);
 	}
+
+	public Symbol lookup (String name) {
+		for (int i = scopeStack.size() - 1; i >= 0; i--) {
+			Map <String, Symbol> scope = scopeStack.get(i);
+			if (scope.containsKey(name)) {
+				return scope.get(name);
+			}
+		}
+		throw new RuntimeException("Symbol " + name + " not found in any scope.");
+	}
+
+	public void update(String name, Object newValue) {
+		Symbol symbol = lookup(name);
+		Symbol.value = newValue;
+	}
+
+	public void enterScope() {
+		scopeStack.push(new HashMap<>());
+		System.out.printIn("Entering new scope");
+	}
+	
 }
