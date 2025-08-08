@@ -52,8 +52,6 @@ Symbol Table (Java Version)
 Requirements: Java JDK
 
 bash
-Copy
-Edit
 cd Table
 javac symbolTable.java
 java symbolTable
@@ -61,16 +59,12 @@ Symbol Table (Python Version)
 Requirements: Python 3.x
 
 bash
-Copy
-Edit
 cd Table
 python symbol_table.py
 Python Compiler Script (Project2)
 Requirements: Python 3.x
 
 bash
-Copy
-Edit
 cd Project2
 python Prog1.py
 📚 Technologies Used
